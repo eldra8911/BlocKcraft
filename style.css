@@ -1,0 +1,422 @@
+/* ================= IMPORTS ================= */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600;700&family=Cinzel+Decorative:wght@700&display=swap');
+
+/* ================= VARIABLES ================= */
+:root {
+    --bg-deep:     #011627;
+    --bg-dark:     #023047;
+    --bg-mid:      #0a4a6e;
+    --blue-light:  #8ECAE6;
+    --blue-mid:    #219EBC;
+    --gold:        #FFB703;
+    --orange:      #FB8500;
+    --text-light:  #d6eaf8;
+    --text-muted:  #8ECAE6;
+
+    --neon-blue:   0 0 8px #219EBC, 0 0 20px #219EBC55;
+    --neon-gold:   0 0 8px #FFB703, 0 0 22px #FFB70355;
+    --neon-orange: 0 0 8px #FB8500, 0 0 20px #FB850055;
+}
+
+/* ================= RESET ================= */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 300;
+    background: var(--bg-deep);
+    color: var(--text-light);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Fond animé — grille LED */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        linear-gradient(rgba(33,158,188,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(33,158,188,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+body > * { position: relative; z-index: 1; }
+
+/* ================= HEADER ================= */
+.header {
+    position: sticky;
+    top: 0;
+    background: rgba(2, 48, 71, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 48px;
+    border-bottom: 1px solid rgba(255,183,3,0.35);
+    box-shadow: 0 2px 24px rgba(0,0,0,0.5), 0 0 0 0 transparent;
+    z-index: 1000;
+    transition: box-shadow 0.3s;
+}
+
+.logo {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 26px;
+    color: var(--gold);
+    text-shadow: var(--neon-gold);
+    letter-spacing: 2px;
+    transition: text-shadow 0.3s;
+}
+
+.logo:hover {
+    text-shadow: 0 0 12px #FFB703, 0 0 35px #FFB703aa;
+}
+
+.nav a {
+    color: var(--blue-light);
+    text-decoration: none;
+    margin-left: 24px;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    padding: 6px 0;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--gold);
+    box-shadow: var(--neon-gold);
+    transition: width 0.3s ease;
+}
+
+.nav a:hover {
+    color: var(--gold);
+}
+
+.nav a:hover::after { width: 100%; }
+
+/* ================= HERO ================= */
+.hero {
+    text-align: center;
+    padding: 120px 20px 90px;
+    background:
+        linear-gradient(to bottom, rgba(1,22,39,0.65), rgba(1,22,39,0.85)),
+        url('image/BlocKcraft.png') center/cover no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Lueur centrale */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(33,158,188,0.18) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero h1 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 52px;
+    color: var(--gold);
+    text-shadow: var(--neon-gold);
+    margin-bottom: 20px;
+    animation: fadeDown 0.8s ease both;
+}
+
+.subtitle {
+    font-size: 18px;
+    color: var(--blue-light);
+    letter-spacing: 1px;
+    margin-bottom: 36px;
+    animation: fadeDown 0.8s 0.15s ease both;
+}
+
+/* IP Box */
+.ip-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    border: 1px solid rgba(255,183,3,0.5);
+    border-radius: 6px;
+    background: rgba(2,48,71,0.7);
+    margin-bottom: 28px;
+    box-shadow: 0 0 16px rgba(255,183,3,0.15);
+    animation: fadeDown 0.8s 0.3s ease both;
+}
+
+#ip {
+    font-size: 18px;
+    color: var(--blue-mid);
+    font-weight: 600;
+    text-shadow: var(--neon-blue);
+    letter-spacing: 1px;
+}
+
+#copyBtn {
+    padding: 8px 16px;
+    border: 1px solid var(--orange);
+    background: transparent;
+    color: var(--orange);
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 13px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+}
+
+#copyBtn:hover {
+    background: var(--orange);
+    color: var(--bg-deep);
+    box-shadow: var(--neon-orange);
+}
+
+/* CTA */
+.cta-btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border: 1px solid var(--gold);
+    color: var(--bg-deep);
+    background: var(--gold);
+    font-weight: 700;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    box-shadow: var(--neon-gold);
+    transition: transform 0.25s, box-shadow 0.25s;
+    animation: fadeDown 0.8s 0.45s ease both;
+}
+
+.cta-btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 18px #FFB703, 0 0 40px #FFB703aa;
+}
+
+/* ================= STATS ================= */
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 50px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(33,158,188,0.2);
+    border-bottom: 1px solid rgba(33,158,188,0.2);
+    background: rgba(2,48,71,0.4);
+}
+
+.stat {
+    flex: 1;
+    max-width: 220px;
+    padding: 20px;
+    position: relative;
+}
+
+.stat + .stat::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 20%; height: 60%;
+    width: 1px;
+    background: rgba(33,158,188,0.3);
+}
+
+.stat h3 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 38px;
+    color: var(--gold);
+    text-shadow: var(--neon-gold);
+}
+
+.stat p {
+    color: var(--text-muted);
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 6px;
+}
+
+/* ================= CARDS ================= */
+.sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    padding: 60px 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.card {
+    background: rgba(10,74,110,0.3);
+    border: 1px solid rgba(33,158,188,0.25);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.card:hover {
+    border-color: var(--gold);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 0 20px rgba(255,183,3,0.2), 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85) saturate(1.1);
+    transition: filter 0.3s;
+}
+
+.card:hover img { filter: brightness(1) saturate(1.2); }
+
+.card h2 {
+    padding: 16px 20px 8px;
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 17px;
+    color: var(--gold);
+    text-shadow: var(--neon-gold);
+    letter-spacing: 1px;
+}
+
+.card p {
+    padding: 0 20px 20px;
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* ================= SECTION INTRO (pages secondaires) ================= */
+.intro {
+    text-align: center;
+    padding: 80px 20px 50px;
+    background: linear-gradient(to bottom, rgba(2,48,71,0.6), transparent);
+}
+
+.intro h1 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 36px;
+    color: var(--gold);
+    text-shadow: var(--neon-gold);
+    margin-bottom: 14px;
+}
+
+.intro p {
+    color: var(--text-muted);
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+/* ================= TABLE (jeux.html) ================= */
+.table-container {
+    padding: 20px 48px 60px;
+    overflow-x: auto;
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    border: 1px solid rgba(33,158,188,0.3);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.info-table thead {
+    background: rgba(2,48,71,0.9);
+}
+
+.info-table th {
+    padding: 16px 20px;
+    text-align: left;
+    color: var(--gold);
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    border-bottom: 1px solid rgba(255,183,3,0.3);
+    text-shadow: var(--neon-gold);
+}
+
+.info-table td {
+    padding: 14px 20px;
+    color: var(--text-light);
+    border-bottom: 1px solid rgba(33,158,188,0.1);
+}
+
+.info-table tbody tr {
+    background: rgba(10,74,110,0.15);
+    transition: background 0.2s;
+}
+
+.info-table tbody tr:nth-child(even) {
+    background: rgba(10,74,110,0.3);
+}
+
+.info-table tbody tr:hover {
+    background: rgba(33,158,188,0.12);
+}
+
+/* ================= FOOTER ================= */
+.footer {
+    text-align: center;
+    padding: 30px;
+    border-top: 1px solid rgba(255,183,3,0.25);
+    background: rgba(2,48,71,0.6);
+    color: var(--text-muted);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 14px;
+        padding: 16px 20px;
+    }
+
+    .nav a { margin-left: 12px; font-size: 14px; }
+
+    .hero h1 { font-size: 30px; }
+
+    .stats { flex-direction: column; align-items: center; gap: 20px; }
+    .stat + .stat::before { display: none; }
+
+    .sections { padding: 30px 20px; }
+
+    .table-container { padding: 20px; }
+}
